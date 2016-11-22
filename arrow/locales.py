@@ -180,10 +180,24 @@ class Locale(object):
 
     def _format_timeframe(self, timeframe, delta):
 
-        return self.timeframes[timeframe].format(abs(delta))
         if delta == 0:
             return self.currentframes[timeframe];
         else:
+            if abs(delta) > 1:
+                if timeframe == 'second':
+                    timeframe = 'seconds'
+                elif timeframe == 'minute':
+                    timeframe = 'minutes'
+                elif timeframe == 'hour':
+                    timeframe = 'hours'
+                elif timeframe == 'day':
+                    timeframe = 'days'
+                elif timeframe == 'week':
+                    timeframe = 'weeks'
+                elif timeframe == 'month':
+                    timeframe = 'months'
+                elif timeframe == 'year':
+                    timeframe = 'years'
             return self.timeframes[timeframe].format(abs(delta))
 
     def _format_relative(self, humanized, timeframe, delta):
